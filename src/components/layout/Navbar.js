@@ -1,19 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 
 const Navbar = (props) => {
 
+    // initialise auth and profile
+    const { auth, profile } = props;
+
+    const links = auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />
+
     return (
-        <nav className="nav-wrapper grey darken-3">
-            <div className="container">
-                <Link to='/' className="brand-logo left">Smart Home</Link>
+        <div className="navbar">
+            <Link to='/' >Smart Home</Link>
+            <label htmlFor="toggle">  &#9776;</label>
+            <input type="checkbox" id="toggle"/>
+            <div className="nav-menu">
+                { links }
             </div>
-        </nav>
+        </div>
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth,
+        profile: state.firebase.profile
+    }
+}
 
-export default connect()(Navbar);
+export default connect(mapStateToProps)(Navbar);

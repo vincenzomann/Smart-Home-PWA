@@ -1,0 +1,87 @@
+/* Default styling is for mobile up to 768px */
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+html {
+  font-family: "helvetica neue", sans-serif;
+}
+
+body {
+  background-color: aliceblue;
+}
+
+/* NAVBAR ---------------------------- */
+
+.navbar {
+  background-color: rgb(34, 67, 129);
+  border-bottom: 1px solid #EAEAEB;
+  text-align: right;
+  height: 70px;
+  line-height: 70px;
+}
+
+.nav-menu{
+  margin: 0 30px 0 0;
+}
+
+.nav-menu ul{
+  list-style-type: none;
+}
+
+.nav-menu a {
+  clear: right;
+  text-decoration: none;
+  color: gray;
+  margin: 0 10px;
+  line-height: 70px;
+}
+
+span {
+  color: #54D17A;
+}
+
+label {
+  margin: 0 40px 0 0;
+  font-size: 26px;
+  line-height: 70px;
+  display: none;
+  width: 26px;
+  float: right;
+}
+#toggle {
+  display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  label {
+      display: block;
+      cursor: pointer;
+  }
+  .menu {
+      text-align: center;
+      width: 100%;
+      display: none;
+  }
+  .menu a {
+      display: block;
+      border-bottom: 1px solid #EAEAEB;
+      margin: 0;
+   
+  }
+  #toggle:checked + .nav-menu {
+      display: block;
+  }
+  
+}
+
+
+/* SIGN UP AND LOG IN */
+
+/* DASHBOARD */
