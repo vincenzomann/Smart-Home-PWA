@@ -1,0 +1,15 @@
+See mario plan tasks for details
+
+npx create react app
+install packages
+set up file structure
+set up firebase
+  config file 
+  create collections in firestore
+  import and use store enhancers to connect to redux
+set up authentication
+navbar links
+dashboard with light summary status
+light details page that turns light on/off
+  
+responsive design

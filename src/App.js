@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import Dashboard from './components/dashboard/Dashboard'
+import Sync from './components/auth/Sync'
+import HAS from './components/dashboard/HAS'
 import Navbar from './components/layout/Navbar';
 import LogIn from './components/auth/LogIn';
 import SignUp from './components/auth/SignUp';
@@ -13,18 +14,19 @@ class App extends Component {
         <div className="App">
           <Navbar />
           <Switch>
-            <Route exact path='/' component={Dashboard}/>
+            <Route exact path='/' component={Sync}/>
+            <Route path='/HAS/:id' component={HAS}/>
             <Route path='/login' component={LogIn} />
             <Route path='/signup' component={SignUp} />
             <Route path='/light' component={LightDetails} />
-            <Route path='/temperature' component={Dashboard} />
-            <Route path='/door' component={Dashboard} />
-            <Route path='/motion' component={Dashboard} />
-            <Route path='/pulse' component={Dashboard} />
-            <Route path='/settings' component={Dashboard} />
-            <Route path='/contacts' component={Dashboard} />
-            <Route path='/messages' component={Dashboard} />
-            <Route path='/users' component={Dashboard} />
+            <Route path='/temperature' component={Sync} />
+            <Route path='/door' component={Sync} />
+            <Route path='/motion' component={Sync} />
+            <Route path='/pulse' component={Sync} />
+            <Route path='/settings' component={Sync} />
+            <Route path='/contacts' component={Sync} />
+            <Route path='/messages' component={Sync} />
+            <Route path='/users' component={Sync} />
           </Switch>
         </div>
       </BrowserRouter>

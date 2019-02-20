@@ -1,5 +1,8 @@
 // import { firestore } from "firebase";
+import {createSystem} from '../actions/systemActions';
 
+  // ACTION CREATOR
+  // Thunk lets you return a function, to halt dispatch to grab data
 export const login = (credentials) => {
   return (dispatch, getState, {getFirebase}) => {
     // initialise firebase
@@ -43,6 +46,9 @@ export const signup = (newUser) => {
       });
     }).then( () => {
       dispatch({ type: 'SIGNUP_SUCCESS'})
+    }).then( () => { 
+      // initialise new system for user
+      dispatch( createSystem() )
     }).catch( err => {
       dispatch({ type: 'SIGNUP_ERROR', err})
     })

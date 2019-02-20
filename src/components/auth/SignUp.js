@@ -26,6 +26,7 @@ class SignUp extends Component {
 
     const { auth, authError } = this.props;
 
+    // wait for system to be made before redirecting !!!
     if (auth.uid) return <Redirect to='/' />
 
     return (
