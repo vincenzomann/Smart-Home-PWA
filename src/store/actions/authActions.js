@@ -1,4 +1,3 @@
-// import { firestore } from "firebase";
 import {createSystem} from '../actions/systemActions';
 
   // ACTION CREATOR

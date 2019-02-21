@@ -8,12 +8,12 @@ import LightSummary from '../light/LightSummary'
 
 const HAS = (props) => {
 
-    const { system, auth } = props;
+    const { fSystem, auth } = props;
 
     if (!auth.uid) return <Redirect to='/login' />
 
     // wait for async fetch to be set properly
-    if (!system){
+    if (!fSystem){
         return (
             <div className="container center">
                 <p>Loading HAS...</p>
@@ -28,7 +28,7 @@ const HAS = (props) => {
                 
                 <div>
                     <Link to='/light'>
-                        <LightSummary system={system} />
+                        <LightSummary fSystem={fSystem} />
                     </Link>
                 </div>
             </div>
@@ -39,13 +39,13 @@ const HAS = (props) => {
 const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id;
     const systems = state.firestore.data.systems;
-    const system = systems ? systems[id] : null;
+    const fSystem = systems ? systems[id] : null;
 
     console.log(systems);
 
     // return object - represents which properties are attached to the props of this component
     return {
-        system: system,
+        fSystem,
         auth: state.firebase.auth,
     }
 }

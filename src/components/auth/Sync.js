@@ -9,7 +9,7 @@ class Sync extends Component{
   render(){
 
     // grab system data from state using destructuring then pass as props into the components
-    const { systems, auth } = this.props;
+    const { systemUID, systems, auth } = this.props;
 
     // if user is not logged in then redirect to login page
     if (!auth.uid){
@@ -17,14 +17,8 @@ class Sync extends Component{
     }
     
     // wait for systems to be grabbed because it is set to undefined whilst it is fetching the data
-    if (!isLoaded(systems)){
-        return (
-            <div className="container center">
-                <p>Synching...</p>
-            </div>
-        )
-    }
-    if (isLoaded(systems)){
+    // once the system has been created for the first time the redux state userID will be set
+    if ( (isLoaded(systems)) && (systemUID != null) ){
       console.log(systems);
       // find this specific system
       const system = systems.find( (system) => { 
@@ -33,7 +27,13 @@ class Sync extends Component{
       console.log(system);
 
       return <Redirect to={'/HAS/' + system.id } />
-    };
+    }else{
+      return (
+            <div className="container center">
+                <p>Synching...</p>
+            </div>
+        )
+    }
 
   }
 }
@@ -44,7 +44,8 @@ const mapStateToProps = (state) => {
   // return object - represents which properties are attached to the props of this component
   return {
     auth: state.firebase.auth,
-    systems: state.firestore.ordered.systems
+    systems: state.firestore.ordered.systems,
+    systemUID: state.system.userID
   }
 
 }

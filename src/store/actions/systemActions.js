@@ -8,7 +8,7 @@ export const createSystem = () => {
     // add system to firestore collection with userID
     firestore.collection('systems').add({
       userID: userID,
-      dummyData: "Lorem Ipsum"
+      dummyData: "(firestore data)"
     }).then( () => {
       dispatch({
         type: 'CREATE_SYSTEM_SUCCESS',

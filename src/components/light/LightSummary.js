@@ -1,12 +1,12 @@
 import React from 'react'
 
 
-const LightSummary = ({system}) => {
+const LightSummary = ({fSystem}) => {
 
     return (
         <div className="summary">
             <h3>Light</h3>
-            <span>Status: {system.dummyData}</span>
+            <span>Status: {fSystem.dummyData}</span>
         </div>
     )
 }

@@ -26,7 +26,10 @@ const systemReducer = (state = initState, action) => {
       return {
         ...state,
         sysError: null,
-        userID: action.userID
+        userID: action.userID,
+        light: {
+          value: 'off'
+        }
       }
     case 'CREATE_SYSTEM_ERROR':
       console.log('create system error', action.err);
