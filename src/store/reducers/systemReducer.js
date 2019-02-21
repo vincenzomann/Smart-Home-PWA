@@ -1,6 +1,7 @@
 const initState = {
   sysError: null,
   userID: null,
+  docID: null,
   light: {
     value: null
   },

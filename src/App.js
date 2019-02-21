@@ -15,18 +15,18 @@ class App extends Component {
           <Navbar />
           <Switch>
             <Route exact path='/' component={Sync}/>
-            <Route path='/HAS/:id' component={HAS}/>
             <Route path='/login' component={LogIn} />
             <Route path='/signup' component={SignUp} />
-            <Route path='/light' component={LightDetails} />
-            <Route path='/temperature' component={Sync} />
-            <Route path='/door' component={Sync} />
-            <Route path='/motion' component={Sync} />
-            <Route path='/pulse' component={Sync} />
-            <Route path='/settings' component={Sync} />
-            <Route path='/contacts' component={Sync} />
-            <Route path='/messages' component={Sync} />
-            <Route path='/users' component={Sync} />
+            <Route path='/:id/HAS' component={HAS}/>
+            <Route path='/:id/light' component={LightDetails} />
+            <Route path='/:id/temperature' component={Sync} />
+            <Route path='/:id/door' component={Sync} />
+            <Route path='/:id/motion' component={Sync} />
+            <Route path='/:id/pulse' component={Sync} />
+            <Route path='/:id/settings' component={Sync} />
+            <Route path='/:id/contacts' component={Sync} />
+            <Route path='/:id/messages' component={Sync} />
+            <Route path='/:id/users' component={Sync} />
           </Switch>
         </div>
       </BrowserRouter>

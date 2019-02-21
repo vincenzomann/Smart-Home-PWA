@@ -9,7 +9,7 @@ class Sync extends Component{
   render(){
 
     // grab system data from state using destructuring then pass as props into the components
-    const { systems, auth } = this.props;
+    const { systems, auth, lSystem } = this.props;
 
     // if user is not logged in then redirect to login page
     if (!auth.uid){
@@ -25,10 +25,11 @@ class Sync extends Component{
       });
       
       // wait to find for the new specific system to be added to the systems collection
-      // once the specific system has been found redirect to that system
+      // once the specific system has been found redirect to that system with route id as the system doc id
       if (system){
         console.log("found system:\n", system);
-        return <Redirect to={'/HAS/' + system.id } />
+        lSystem.docID = system.id;
+        return <Redirect to={'/' + system.id + '/HAS'} />
       }
       else {
         return (
@@ -56,7 +57,7 @@ const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
     systems: state.firestore.ordered.systems,
-    systemUID: state.system.userID
+    lSystem: state.system
   }
 
 }
