@@ -4,7 +4,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 
-const PulseDetails = (props) => {
+const NotificationsDetails = (props) => {
 
     const { fSystem, auth, } = props;
 
@@ -14,7 +14,7 @@ const PulseDetails = (props) => {
     if (fSystem){
         return (
             <div>
-                <h3>Heart Rate</h3>
+                <h3>Door Sensor</h3>
 
                 <div>
                     <input type="checkbox" id="checkLed1" />
@@ -64,4 +64,4 @@ export default compose(
     firestoreConnect([
         { collection: 'systems'}
     ])
-)(PulseDetails);
+)(NotificationsDetails);

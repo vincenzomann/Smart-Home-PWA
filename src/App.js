@@ -2,10 +2,15 @@ import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Sync from './components/auth/Sync'
 import HAS from './components/dashboard/HAS'
-import Navbar from './components/layout/Navbar';
-import LogIn from './components/auth/LogIn';
-import SignUp from './components/auth/SignUp';
+import Navbar from './components/layout/Navbar' 
+import LogIn from './components/auth/LogIn'
+import SignUp from './components/auth/SignUp'
+import NotificationsDetails from './components/notifications/NotificationsDetails'
 import LightDetails from './components/light/LightDetails'
+import TemperatureDetails from './components/temperature/TemperatureDetails'
+import PulseDetails from './components/pulse/PulseDetails'
+import DoorDetails from './components/door/DoorDetails'
+import MotionDetails from './components/motion/MotionDetails'
 
 class App extends Component {
   render() {
@@ -18,11 +23,12 @@ class App extends Component {
             <Route path='/login' component={LogIn} />
             <Route path='/signup' component={SignUp} />
             <Route path='/:id/HAS' component={HAS}/>
+            <Route path='/:id/notifications' component={NotificationsDetails}/>
             <Route path='/:id/light' component={LightDetails} />
-            <Route path='/:id/temperature' component={Sync} />
-            <Route path='/:id/door' component={Sync} />
-            <Route path='/:id/motion' component={Sync} />
-            <Route path='/:id/pulse' component={Sync} />
+            <Route path='/:id/temperature' component={TemperatureDetails} />
+            <Route path='/:id/pulse' component={PulseDetails} />
+            <Route path='/:id/door' component={DoorDetails} />
+            <Route path='/:id/motion' component={MotionDetails} />
             <Route path='/:id/settings' component={Sync} />
             <Route path='/:id/contacts' component={Sync} />
             <Route path='/:id/messages' component={Sync} />

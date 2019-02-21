@@ -4,7 +4,12 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import NotificationsSummary from '../notifications/NotificationsSummary'
+import TemperatureSummary from '../temperature/TemperatureSummary'
 import LightSummary from '../light/LightSummary'
+import PulseSummary from '../pulse/PulseSummary'
+import DoorSummary from '../door/DoorSummary'
+import MotionSummary from '../motion/MotionSummary'
 
 class HAS extends Component{
     
@@ -14,12 +19,12 @@ class HAS extends Component{
 
         if (!auth.uid) return <Redirect to='/login' />
 
-        // wait for async fetch to be set properly
+        // system is undefined at first so need to wait for async fetch to be set properly
         if (fSystem){
 
             // assign the uid to local system
             lSystem.userID = auth.uid;
-            console.log("lsystem:\n", lSystem);
+            console.log("lSystem:\n", lSystem);
             console.log("fSystem:\n", fSystem);
 
             return (
@@ -29,8 +34,28 @@ class HAS extends Component{
 
                     {/* Load Summary components with links to their respective detail pages */}
                     <div>
+                        <Link to={'/' + sysDocID + '/notifications' }><h3>Notifications</h3></Link>
+                        <NotificationsSummary fSystem={fSystem} />
+                    </div>
+                    <div>
                         <Link to={'/' + sysDocID + '/light' }><h3>Light</h3></Link>
                         <LightSummary fSystem={fSystem} />
+                    </div>
+                    <div>
+                        <Link to={'/' + sysDocID + '/temperature' }><h3>Temperature</h3></Link>
+                        <TemperatureSummary fSystem={fSystem} />
+                    </div>
+                    <div>
+                        <Link to={'/' + sysDocID + '/pulse' }><h3>Heart Rate</h3></Link>
+                        <PulseSummary fSystem={fSystem} />
+                    </div>
+                    <div>
+                        <Link to={'/' + sysDocID + '/door' }><h3>Door Sensor</h3></Link>
+                        <DoorSummary fSystem={fSystem} />
+                    </div>
+                    <div>
+                        <Link to={'/' + sysDocID + '/motion' }><h3>Motion Sensor</h3></Link>
+                        <MotionSummary fSystem={fSystem} />
                     </div>
 
                 </div>
@@ -57,7 +82,6 @@ const mapStateToProps = (state, ownProps) => {
     const systems = state.firestore.data.systems;
     const firestoreSystem = systems ? systems[sysDocID] : null;
     const localSystem = state.system;
-    console.log(systems);
 
     // return object - represents which properties are attached to the props of this component
     return {

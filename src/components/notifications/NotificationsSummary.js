@@ -1,6 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-const PulseSummary = ({fSystem}) => {
+
+const Notifications = ({fSystem}) => {
 
     return (
         <div className="summary">
@@ -9,4 +10,4 @@ const PulseSummary = ({fSystem}) => {
     )
 }
 
-export default PulseSummary;
+export default Notifications;

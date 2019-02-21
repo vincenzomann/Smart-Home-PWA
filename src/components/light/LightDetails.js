@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
+import React from 'react'
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
+import { Redirect } from 'react-router-dom'
 
 const LightDetails = (props) => {
 
@@ -10,7 +10,7 @@ const LightDetails = (props) => {
 
     if (!auth.uid) return <Redirect to='/login' />
 
-    // wait for async fetch to be set properly
+    // system is undefined at first so need to wait for async fetch to be set properly
     if (fSystem){
         return (
             <div>
@@ -48,7 +48,6 @@ const mapStateToProps = (state, ownProps) => {
     const systems = state.firestore.data.systems;
     const firestoreSystem = systems ? systems[sysDocID] : null;
     const localSystem = state.system;
-    console.log(systems);
 
     // return object - represents which properties are attached to the props of this component
     return {
