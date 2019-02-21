@@ -11,8 +11,7 @@ export const createSystem = () => {
       dummyData: "(firestore data)"
     }).then( () => {
       dispatch({
-        type: 'CREATE_SYSTEM_SUCCESS',
-        userID: userID
+        type: 'CREATE_SYSTEM_SUCCESS'
       })
     }).catch( (err) => {
       dispatch({

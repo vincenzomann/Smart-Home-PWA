@@ -1,4 +1,4 @@
-import {createSystem} from '../actions/systemActions';
+import {createSystem} from '../actions/systemActions'
 
   // ACTION CREATOR
   // Thunk lets you return a function, to halt dispatch to grab data
@@ -11,9 +11,14 @@ export const login = (credentials) => {
       credentials.email,
       credentials.password
     ).then( () => {
-      dispatch({ type: 'LOGIN_SUCCESS'})
+      dispatch({ 
+        type: 'LOGIN_SUCCESS'
+      })
     }).catch( (err) => {
-      dispatch({ type: 'LOGIN_ERROR', err});
+      dispatch({ 
+        type: 'LOGIN_ERROR', 
+        err
+      });
     })
   }
 }
@@ -22,7 +27,9 @@ export const logout = () => {
   return (dispatch, getState, {getFirebase}) => {
     const firebase = getFirebase();
     firebase.auth().signOut().then(()=>{
-      dispatch({ type: 'LOGOUT_SUCCESS'})
+      dispatch({ 
+        type: 'LOGOUT_SUCCESS'
+      })
     });
   }
 }

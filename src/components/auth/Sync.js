@@ -9,31 +9,42 @@ class Sync extends Component{
   render(){
 
     // grab system data from state using destructuring then pass as props into the components
-    const { systemUID, systems, auth } = this.props;
+    const { systems, auth } = this.props;
 
     // if user is not logged in then redirect to login page
     if (!auth.uid){
       return <Redirect to='/login'/>
-    }
-    
+    } 
+
     // wait for systems to be grabbed because it is set to undefined whilst it is fetching the data
-    // once the system has been created for the first time the redux state userID will be set
-    if ( (isLoaded(systems)) && (systemUID != null) ){
-      console.log(systems);
+    if ( (isLoaded(systems))  ){
+
       // find this specific system
       const system = systems.find( (system) => { 
         return system.userID === auth.uid;
       });
-      console.log(system);
+      
+      // wait to find for the new specific system to be added to the systems collection
+      // once the specific system has been found redirect to that system
+      if (system){
+        console.log("found system:\n", system);
+        return <Redirect to={'/HAS/' + system.id } />
+      }
+      else {
+        return (
+          <div className="container center">
+              <p>Fetching system...</p>
+          </div>
+        )
+      }
 
-      return <Redirect to={'/HAS/' + system.id } />
     }else{
       return (
-            <div className="container center">
-                <p>Synching...</p>
-            </div>
-        )
-    }
+          <div className="container center">
+              <p>Loading systems...</p>
+          </div>
+      )
+    } 
 
   }
 }

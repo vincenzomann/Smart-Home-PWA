@@ -2,7 +2,7 @@ const initState = {
   sysError: null,
   userID: null,
   light: {
-    value: 'on'
+    value: null
   },
   temperature: {
     reading: null,
@@ -25,11 +25,7 @@ const systemReducer = (state = initState, action) => {
       console.log('create system success\n');
       return {
         ...state,
-        sysError: null,
-        userID: action.userID,
-        light: {
-          value: 'off'
-        }
+        sysError: null
       }
     case 'CREATE_SYSTEM_ERROR':
       console.log('create system error', action.err);

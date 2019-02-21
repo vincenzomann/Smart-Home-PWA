@@ -8,29 +8,37 @@ import LightSummary from '../light/LightSummary'
 
 const HAS = (props) => {
 
-    const { fSystem, auth } = props;
+    const { fSystem, auth, lSystem } = props;
 
     if (!auth.uid) return <Redirect to='/login' />
 
     // wait for async fetch to be set properly
-    if (!fSystem){
-        return (
-            <div className="container center">
-                <p>Loading HAS...</p>
-            </div>
-        )
-    }
-    else{
+    if (fSystem){
+
+        // assign the uid to local system
+        lSystem.userID = auth.uid;
+        console.log("lsystem:\n", lSystem);
+        console.log("fSystem:\n", fSystem);
+
         return (
             <div className="dashboard">
-                {console.log(props)}
+                {console.log("props:\n", props)}
                 <h2>HAS</h2>
-                
+
+                {/* Load Summary components with links to their respective detail pages */}
                 <div>
                     <Link to='/light'>
                         <LightSummary fSystem={fSystem} />
                     </Link>
                 </div>
+
+            </div>
+        )
+    }
+    else{
+        return (
+            <div className="container center">
+                <p>Loading HAS...</p>
             </div>
         )
     }
@@ -39,14 +47,14 @@ const HAS = (props) => {
 const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id;
     const systems = state.firestore.data.systems;
-    const fSystem = systems ? systems[id] : null;
-
-    console.log(systems);
+    const firestoreSystem = systems ? systems[id] : null;
+    const localSystem = state.system;
 
     // return object - represents which properties are attached to the props of this component
     return {
-        fSystem,
+        fSystem: firestoreSystem,
         auth: state.firebase.auth,
+        lSystem: localSystem
     }
 }
 
