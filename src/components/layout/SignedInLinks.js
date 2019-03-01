@@ -5,9 +5,14 @@ import { logout } from '../../store/actions/authActions'
 // have to pass in props because it's a functional component not a class
 const SignedInLinks = (props) => {
 
+    const handleClick = (e) => {
+        props.logout();
+    }
+
     return (
         <ul className="open">
-            <li><a href='/' onClick={props.logout}>Log Out</a></li>
+            <li><a href='/' onClick={handleClick}>Log Out</a></li>
+            {/* Settings link */}
         </ul>
     )
 }

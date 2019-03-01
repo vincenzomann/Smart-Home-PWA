@@ -5,18 +5,18 @@ const initState = {
   light: {
     value: null
   },
-  temperature: {
-    reading: null,
-    target: null
-  },
-  pulse: {
-    connected: null,
-    maxValue: null,
-    minValue: null,
-    reading: null
-  },
-  contacts: [],
-  alerts: [],
+  // temperature: {
+  //   reading: null,
+  //   target: null
+  // },
+  // pulse: {
+  //   connected: null,
+  //   maxValue: null,
+  //   minValue: null,
+  //   reading: null
+  // },
+  // contacts: [],
+  // alerts: [],
 }
 
 const systemReducer = (state = initState, action) => {
@@ -34,7 +34,11 @@ const systemReducer = (state = initState, action) => {
         ...state,
         sysError: 'create system failed'
       }
-    
+    case 'LIGHT_UPDATED':
+      return {
+        ...state,
+
+      }
     default:
       return state;
   }

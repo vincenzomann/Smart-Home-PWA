@@ -15,12 +15,12 @@ class HAS extends Component{
     
     render(){
 
-        const { fSystem, auth, lSystem, sysDocID } = this.props;
+        const { fSystem, auth, lSystem, sysDocID, rpi } = this.props;
 
         if (!auth.uid) return <Redirect to='/login' />
 
         // system is undefined at first so need to wait for async fetch to be set properly
-        if (fSystem){
+        if (fSystem && rpi){
 
             // assign the uid to local system
             lSystem.userID = auth.uid;
@@ -33,27 +33,27 @@ class HAS extends Component{
                     <h2>HAS</h2>
 
                     {/* Load Summary components with links to their respective detail pages */}
-                    <div>
+                    <div className="summary-link">
                         <Link to={'/' + sysDocID + '/notifications' }><h3>Notifications</h3></Link>
                         <NotificationsSummary fSystem={fSystem} />
                     </div>
-                    <div>
+                    <div className="summary-link">
                         <Link to={'/' + sysDocID + '/light' }><h3>Light</h3></Link>
-                        <LightSummary fSystem={fSystem} />
+                        <LightSummary rpi={rpi}/>
                     </div>
-                    <div>
+                    <div className="summary-link">
                         <Link to={'/' + sysDocID + '/temperature' }><h3>Temperature</h3></Link>
                         <TemperatureSummary fSystem={fSystem} />
                     </div>
-                    <div>
+                    <div className="summary-link">
                         <Link to={'/' + sysDocID + '/pulse' }><h3>Heart Rate</h3></Link>
                         <PulseSummary fSystem={fSystem} />
                     </div>
-                    <div>
+                    <div className="summary-link">
                         <Link to={'/' + sysDocID + '/door' }><h3>Door Sensor</h3></Link>
                         <DoorSummary fSystem={fSystem} />
                     </div>
-                    <div>
+                    <div className="summary-link">
                         <Link to={'/' + sysDocID + '/motion' }><h3>Motion Sensor</h3></Link>
                         <MotionSummary fSystem={fSystem} />
                     </div>
@@ -82,20 +82,33 @@ const mapStateToProps = (state, ownProps) => {
     const systems = state.firestore.data.systems;
     const firestoreSystem = systems ? systems[sysDocID] : null;
     const localSystem = state.system;
+    // TO DO - get specific rpi for that system
+    const RPIs = state.firestore.ordered.RPi;
+    const rpi = RPIs ? RPIs[0] : null;
 
     // return object - represents which properties are attached to the props of this component
     return {
         fSystem: firestoreSystem,
         auth: state.firebase.auth,
         lSystem: localSystem,
-        sysDocID
+        sysDocID,
+        rpi
     }
 }
 
 
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect([
-        { collection: 'systems'}
-    ])
+    firestoreConnect( (props) => {
+        // Wait for props to be fetched properly
+        if (!props.auth.uid) return []
+        return [
+            {
+            collection: 'systems',
+            where: [['userID', '==', props.auth.uid]]
+            // only grab this user's system
+            },
+            { collection: 'RPi'}
+        ]
+    })
 )(HAS);

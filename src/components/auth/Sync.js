@@ -17,7 +17,7 @@ class Sync extends Component{
     } 
 
     // wait for systems to be grabbed because it is set to undefined whilst it is fetching the data
-    if ( (isLoaded(systems))  ){
+    if ( isLoaded(systems) ){
 
       // find this specific system
       const system = systems.find( (system) => { 
@@ -66,7 +66,15 @@ const mapStateToProps = (state) => {
 // connect component to firestore, telling what data to sync
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([
-      { collection: 'systems'}
-  ])
+  firestoreConnect( (props) => {
+    // Wait for props to be fetched properly
+    if (!props.auth.uid) return []
+    return [
+      {
+        collection: 'systems',
+        where: [['userID', '==', props.auth.uid]]
+        // only grab this user's system
+      }
+    ]
+  })
 )(Sync);

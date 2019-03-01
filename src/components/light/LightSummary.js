@@ -1,11 +1,13 @@
 import React from 'react'
 
 
-const LightSummary = ({fSystem}) => {
+const LightSummary = ({rpi}) => {
 
     return (
         <div className="summary">
-            <span>Status: {fSystem.dummyData}</span>
+            {/* <p>Status: {fSystem.dummyData}</p> */}
+            <p>Light 1: {rpi.led1.toString()}</p>
+            <p>Light 2: {rpi.led2.toString()}</p>
         </div>
     )
 }

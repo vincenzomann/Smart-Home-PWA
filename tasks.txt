@@ -11,5 +11,6 @@ set up authentication
 navbar links
 dashboard with light summary status
 light details page that turns light on/off
+rpi program listening to firestore value and changes GPIO
   
 responsive design

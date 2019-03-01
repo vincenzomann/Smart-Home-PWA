@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { signup } from '../../store/actions/authActions';
+import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { signup } from '../../store/actions/authActions'
 
 class SignUp extends Component {
   state = {
@@ -44,6 +44,8 @@ class SignUp extends Component {
             <label htmlFor="password">Password</label>
             <input type="password" id="password" onChange={this.handleChange}/>
           </div>
+
+          {/* TO DO - VALIDATE PASSWORD */}
 
           <div className="input-field">
             <label htmlFor="text">First Name</label>
