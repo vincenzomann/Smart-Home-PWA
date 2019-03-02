@@ -3,7 +3,8 @@ const initState = {
   userID: null,
   docID: null,
   light: {
-    value: null
+    led1: null,
+    led2: null
   },
   // temperature: {
   //   reading: null,
@@ -36,8 +37,7 @@ const systemReducer = (state = initState, action) => {
       }
     case 'LIGHT_UPDATED':
       return {
-        ...state,
-
+        ...state
       }
     default:
       return state;

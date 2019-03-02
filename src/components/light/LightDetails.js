@@ -8,36 +8,16 @@ import { updateLight } from '../../store/actions/systemActions'
 class LightDetails extends Component {
 
     handleLightSwitch = (e) => {
-        const led = document.getElementById("checkLed1")
-        console.log(led)
-        console.log(e.target);
-        // pass in checkbox element
-        this.props.updateLight(e.target);
+        // pass in element id
+        this.props.updateLight(e.target.id);
     }
 
-    isLightChecked = (e) => {
-        console.log(e.target);
+    status = (light) => {
+        if (light === "true")
+            return "On"
+        else
+            return "Off"
     }
-
-    // checkboxLight = () => {
-        
-        
-    //     if (light1 === 'true'){
-    //         boxLed1.setAttribute("checked")
-    //     }
-    //     else{
-    //         if (boxLed1.hasAttribute("checked") === "true")
-    //             boxLed1.removeAttribute("checked")
-    //     }
-
-    //     if (light2 === 'true'){
-    //         boxLed2.setAttribute("checked")
-    //     }
-    //     else{
-    //         if (boxLed2.hasAttribute("checked") === "true")
-    //             boxLed2.removeAttribute("checked")
-    //     }
-    // }
     
     render() {
         // get firestore state and pass to props using destructoring
@@ -49,39 +29,35 @@ class LightDetails extends Component {
         if (fSystem && rpi){
             
             // get light values from firestore
-            const light1 = rpi.led1;
-            const light2 = rpi.led2;
-            
-            // this.props.updateLight();
-            console.log(light1, light2);
-
-            this.isLightChecked(light1,light2);
-
+            const light1 = rpi.led1.toString();
+            const light2 = rpi.led2.toString();
             
             return (
                 <div>
                     <h3>Light</h3>
 
                     <div>
-                        {/* to get element by id in react, use ref attribute */}
-                        <input type="checkbox" id="checkLed1" 
-                            ref={ref => this.getLed1 = ref}
-                            onChange={this.handleLightSwitch}/>
-                        <label htmlFor="checkLed1">Turn Light 1 on</label>
+                        <span>Light 1: <b>{this.status(light1)}</b></span>
                     </div>
 
                     <div>
-                        <span>Status: <b>{rpi.led1.toString()}</b></span>
+                        <button id="btnLed1On"
+                            onClick={this.handleLightSwitch}>Turn on</button>
+                        <button id="btnLed1Off"
+                            onClick={this.handleLightSwitch}>Turn off</button> 
+                    </div>
+
+                    <br/>
+
+                    <div>
+                        <span>Light 2: <b>{this.status(light2)}</b></span>
                     </div>
 
                     <div>
-                        <input type="checkbox" id="checkLed2" ref="checkLed2"
-                            onChange={this.handleLightSwitch}/>
-                        <label htmlFor="checkLed2">Turn Light 2 on</label>
-                    </div>
-
-                    <div>
-                        <span>Status: <b>{rpi.led2.toString()}</b></span>
+                        <button id="btnLed2On"
+                            onClick={this.handleLightSwitch}>Turn on</button>
+                        <button id="btnLed2Off"
+                            onClick={this.handleLightSwitch}>Turn off</button>
                     </div>
 
                 </div>
@@ -122,7 +98,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateLight: (checkbox) => dispatch(updateLight(checkbox))
+        updateLight: (btnID) => dispatch(updateLight(btnID))
     }
 }
 
