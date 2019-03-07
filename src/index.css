@@ -1,3 +1,7 @@
+.App {
+  background-color: rgb(43, 205, 226);
+}
+
 .navbar > *{
   cursor: pointer;
   display: inline;
