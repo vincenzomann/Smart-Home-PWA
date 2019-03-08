@@ -16,10 +16,12 @@ const allStoreEnhancers = compose(
   applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
   reduxFirestore(fbConfig),
   reactReduxFirebase(fbConfig, {useFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true}),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  // redux chrome dev tools must be commented out when being deployed!!!
 )
 
 const store = createStore(rootReducer, allStoreEnhancers);
+
 
 store.firebaseAuthIsReady.then( () => {
   ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

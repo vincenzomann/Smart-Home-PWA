@@ -12,5 +12,20 @@ navbar links
 dashboard with light summary status
 light details page that turns light on/off
 rpi program listening to firestore value and changes GPIO
+
+hosting
+  redux chrome dev tools must be commented out when being deployed!!!
+  cd into app
+  yarn start to test locally
+  yarn build
+  serve -s build
+  firebase login
+  firebase init
+    hosting
+    'build' as public directory
+    single page app yes
+    overwrite index.html no
+  firebase deployed
+  need to yarn build before every firebase deploy
   
 responsive design
