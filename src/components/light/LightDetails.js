@@ -12,7 +12,8 @@ class LightDetails extends Component {
         this.props.updateLight(e.target.id);
     }
 
-    status = (light) => {
+    // method to translate "true" to "On" and "false" to "Off"
+    lightStatus = (light) => {
         if (light === "true")
             return "On"
         else
@@ -31,13 +32,14 @@ class LightDetails extends Component {
             // get light values from firestore
             const light1 = rpi.led1.toString();
             const light2 = rpi.led2.toString();
+            const luxVal = rpi.lux.toString();
             
             return (
                 <div>
                     <h3>Light</h3>
 
                     <div>
-                        <span>Light 1: <b>{this.status(light1)}</b></span>
+                        <span>Light 1: <b>{this.lightStatus(light1)}</b></span>
                     </div>
 
                     <div>
@@ -50,7 +52,7 @@ class LightDetails extends Component {
                     <br/>
 
                     <div>
-                        <span>Light 2: <b>{this.status(light2)}</b></span>
+                        <span>Light 2: <b>{this.lightStatus(light2)}</b></span>
                     </div>
 
                     <div>
@@ -58,6 +60,62 @@ class LightDetails extends Component {
                             onClick={this.handleLightSwitch}>Turn on</button>
                         <button id="btnLed2Off"
                             onClick={this.handleLightSwitch}>Turn off</button>
+                    </div>
+
+                    <br/>
+
+                    <div>
+                        <span>Lux value: <b>{luxVal}</b></span>
+                    </div>
+
+                    <br/>
+
+                    <div>
+                        <span>Lux value guide</span>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>Lighting condition</th>
+                                    <th>Lux value range</th>
+                                </tr>
+                                <tr>
+                                    <td>Pitch Black</td>
+                                    <td>0 - 10</td>
+                                </tr>
+                                <tr>
+                                    <td>Very Dark</td>
+                                    <td>11 - 50</td>
+                                </tr>
+                                <tr>
+                                    <td>Dark Indoors</td>
+                                    <td>51 - 200</td>
+                                </tr>
+                                <tr>
+                                    <td>Dim Indoors</td>
+                                    <td>201 - 400</td>
+                                </tr>
+                                <tr>
+                                    <td>Normal Indoors</td>
+                                    <td>401 - 1000</td>
+                                </tr>
+                                <tr>
+                                    <td>Bright Indoors</td>
+                                    <td>1001 - 5000</td>
+                                </tr>
+                                <tr>
+                                    <td>Dim Outdoors</td>
+                                    <td>5001 - 10,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Cloudy Outdoors</td>
+                                    <td>10,001 - 30,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Direct Sunlight</td>
+                                    <td>30,001 - 100,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>

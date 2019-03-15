@@ -12,6 +12,9 @@ navbar links
 dashboard with light summary status
 light details page that turns light on/off
 rpi program listening to firestore value and changes GPIO
+rpi sending lux values to firestore
+  pwa listens for values and displays and uses logic to automate lights
+Had to fall back to real time database instead of firestore because too many read operation went through all the free data usage
 
 hosting
   redux chrome dev tools must be commented out when being deployed!!!
@@ -25,7 +28,7 @@ hosting
     'build' as public directory
     single page app yes
     overwrite index.html no
-  firebase deployed
+  firebase deploy
   need to yarn build before every firebase deploy
   
 responsive design
