@@ -35,6 +35,7 @@ class LightDetails extends Component {
             const light2 = rpi.led2.toString();
             const luxVal = rpi.lux.toString();
 
+            // get lux value from RTD
             sys1.child('lux').on('value', snap => {
                 console.log(snap.val())
             });
