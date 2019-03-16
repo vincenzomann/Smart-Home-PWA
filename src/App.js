@@ -11,6 +11,7 @@ import TemperatureDetails from './components/temperature/TemperatureDetails'
 import PulseDetails from './components/pulse/PulseDetails'
 import DoorDetails from './components/door/DoorDetails'
 import MotionDetails from './components/motion/MotionDetails'
+// import { FirebaseDatabaseProvider } from '@react-firebase/database'
 
 class App extends Component {
   render() {

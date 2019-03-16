@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import 'firebase/database'
 
 // Initialize Firebase
 var config = {
@@ -15,5 +16,7 @@ var config = {
 
 firebase.initializeApp(config);
 firebase.firestore();
+const rtdb = firebase.database().ref();
+export const sys1 = rtdb.child("system1");
 
 export default firebase;

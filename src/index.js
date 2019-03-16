@@ -11,6 +11,7 @@ import thunk from 'redux-thunk'
 import { reduxFirestore, getFirestore } from 'redux-firestore'
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
 import fbConfig from './config/fbConfig'
+// import { FirebaseDatabaseProvider } from '@react-firebase/database'
 
 const allStoreEnhancers = compose(
   applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
@@ -22,6 +23,10 @@ const allStoreEnhancers = compose(
 
 const store = createStore(rootReducer, allStoreEnhancers);
 
+
+// store.firebaseAuthIsReady.then( () => {
+//   ReactDOM.render(<Provider store={store}><FirebaseDatabaseProvider ><App /></FirebaseDatabaseProvider></Provider>, document.getElementById('root'));
+// })
 
 store.firebaseAuthIsReady.then( () => {
   ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

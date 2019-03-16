@@ -4,6 +4,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import { updateLight } from '../../store/actions/systemActions'
+import { sys1 } from '../../config/fbConfig'
 
 class LightDetails extends Component {
 
@@ -33,6 +34,10 @@ class LightDetails extends Component {
             const light1 = rpi.led1.toString();
             const light2 = rpi.led2.toString();
             const luxVal = rpi.lux.toString();
+
+            sys1.child('lux').on('value', snap => {
+                console.log(snap.val())
+            });
             
             return (
                 <div>
