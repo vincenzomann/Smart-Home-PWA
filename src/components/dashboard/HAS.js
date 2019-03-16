@@ -10,22 +10,29 @@ import LightSummary from '../light/LightSummary'
 import PulseSummary from '../pulse/PulseSummary'
 import DoorSummary from '../door/DoorSummary'
 import MotionSummary from '../motion/MotionSummary'
+import { fetchSystemData } from '../../store/actions/dataActions'
 
 class HAS extends Component{
+
+    componentDidMount = () => {
+        // get values from RTD and stored in redux state
+        this.props.fetchSystemData();
+    }
     
     render(){
 
-        const { fSystem, auth, lSystem, sysDocID, rpi } = this.props;
+        const { fSystem, auth, lSystem, sysDocID, database } = this.props;
 
         if (!auth.uid) return <Redirect to='/login' />
 
         // system is undefined at first so need to wait for async fetch to be set properly
-        if (fSystem && rpi){
+        if (fSystem && (database.led1 != null) ){
 
             // assign the uid to local system
             lSystem.userID = auth.uid;
             console.log("lSystem:\n", lSystem);
             console.log("fSystem:\n", fSystem);
+            console.log(database);
 
             return (
                 <div className="dashboard">
@@ -39,7 +46,7 @@ class HAS extends Component{
                     </div>
                     <div className="summary-link">
                         <Link to={'/' + sysDocID + '/light' }><h3>Light</h3></Link>
-                        <LightSummary rpi={rpi}/>
+                        <LightSummary database={database}/>
                     </div>
                     <div className="summary-link">
                         <Link to={'/' + sysDocID + '/temperature' }><h3>Temperature</h3></Link>
@@ -83,8 +90,7 @@ const mapStateToProps = (state, ownProps) => {
     const firestoreSystem = systems ? systems[sysDocID] : null;
     const localSystem = state.system;
     // TO DO - get specific rpi for that system
-    const RPIs = state.firestore.ordered.RPi;
-    const rpi = RPIs ? RPIs[0] : null;
+    const database = state.database;
 
     // return object - represents which properties are attached to the props of this component
     return {
@@ -92,13 +98,19 @@ const mapStateToProps = (state, ownProps) => {
         auth: state.firebase.auth,
         lSystem: localSystem,
         sysDocID,
-        rpi
+        database
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchSystemData: () => dispatch(fetchSystemData())
     }
 }
 
 
 export default compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect( (props) => {
         // Wait for props to be fetched properly
         if (!props.auth.uid) return []
@@ -107,8 +119,7 @@ export default compose(
             collection: 'systems',
             where: [['userID', '==', props.auth.uid]]
             // only grab this user's system
-            },
-            { collection: 'RPi'}
+            }
         ]
     })
 )(HAS);

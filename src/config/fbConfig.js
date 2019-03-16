@@ -3,20 +3,12 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import 'firebase/database'
 
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyB1X48SrnZyb0IE4j8UDooTmqmX7-cdgXY",
-  authDomain: "smart-home-pwa.firebaseapp.com",
-  databaseURL: "https://smart-home-pwa.firebaseio.com",
-  projectId: "smart-home-pwa",
-  storageBucket: "smart-home-pwa.appspot.com",
-  messagingSenderId: "940731683055"
-};
+// config keys stored in separate file and not uploaded to git
+import { FirebaseKeys } from './keys/FirebaseKeys'
 
 
-firebase.initializeApp(config);
+firebase.initializeApp(FirebaseKeys);
 firebase.firestore();
-const rtdb = firebase.database().ref();
-export const sys1 = rtdb.child("system1");
+export const rtdb = firebase.database().ref();
 
 export default firebase;

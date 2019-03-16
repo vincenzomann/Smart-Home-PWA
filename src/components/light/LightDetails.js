@@ -3,10 +3,15 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
-import { updateLight } from '../../store/actions/systemActions'
-import { sys1 } from '../../config/fbConfig'
+import { updateLight } from '../../store/actions/dataActions'
+import { fetchSystemData } from '../../store/actions/dataActions'
 
 class LightDetails extends Component {
+
+    componentDidMount = () => {
+        // get values from RTD and stored in redux state
+        this.props.fetchSystemData();
+    }
 
     handleLightSwitch = (e) => {
         // pass in element id
@@ -15,37 +20,30 @@ class LightDetails extends Component {
 
     // method to translate "true" to "On" and "false" to "Off"
     lightStatus = (light) => {
-        if (light === "true")
+        if (light === true)
             return "On"
-        else
+        else if (light === false)
             return "Off"
+        else
+            return "-"
     }
     
     render() {
         // get firestore state and pass to props using destructoring
-        const { fSystem, auth, rpi } = this.props;
+        const { fSystem, auth, database } = this.props;
         
         if (!auth.uid) return <Redirect to='/login' />
         
         // system is undefined at first so need to wait for async fetch to be set properly
-        if (fSystem && rpi){
-            
-            // get light values from firestore
-            const light1 = rpi.led1.toString();
-            const light2 = rpi.led2.toString();
-            const luxVal = rpi.lux.toString();
-
-            // get lux value from RTD
-            sys1.child('lux').on('value', snap => {
-                console.log(snap.val())
-            });
+        // TO DO - only return jsx when there is data
+        if (fSystem && (database.led1 != null)) {
             
             return (
                 <div>
                     <h3>Light</h3>
 
                     <div>
-                        <span>Light 1: <b>{this.lightStatus(light1)}</b></span>
+                        <span>Light 1: <b>{this.lightStatus(database.led1)}</b></span>
                     </div>
 
                     <div>
@@ -58,7 +56,7 @@ class LightDetails extends Component {
                     <br/>
 
                     <div>
-                        <span>Light 2: <b>{this.lightStatus(light2)}</b></span>
+                        <span>Light 2: <b>{this.lightStatus(database.led2)}</b></span>
                     </div>
 
                     <div>
@@ -71,7 +69,7 @@ class LightDetails extends Component {
                     <br/>
 
                     <div>
-                        <span>Lux value: <b>{luxVal}</b></span>
+                        <span>Lux value: <b>{database.lux}</b></span>
                     </div>
 
                     <br/>
@@ -147,21 +145,21 @@ const mapStateToProps = (state, ownProps) => {
     const systems = state.firestore.data.systems;
     const firestoreSystem = systems ? systems[sysDocID] : null;
     const localSystem = state.system;
-    // TO DO - get specific rpi for that system
-    const RPIs = state.firestore.ordered.RPi;
-    const rpi = RPIs ? RPIs[0] : null;
+    // TO DO - get specific data system for that user
+    const database = state.database;
 
     // return object - represents which properties are attached to the props of this component
     return {
         fSystem: firestoreSystem,
         auth: state.firebase.auth,
         lSystem: localSystem,
-        rpi
+        database
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        fetchSystemData: () => dispatch(fetchSystemData()),
         updateLight: (btnID) => dispatch(updateLight(btnID))
     }
 }
@@ -178,8 +176,7 @@ export default compose(
             collection: 'systems',
             where: [['userID', '==', props.auth.uid]]
             // only grab this user's system
-            },
-            { collection: 'RPi'}
+            }
         ]
     })
 )(LightDetails);

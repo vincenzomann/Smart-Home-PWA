@@ -17,7 +17,8 @@ const allStoreEnhancers = compose(
   applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
   reduxFirestore(fbConfig),
   reactReduxFirebase(fbConfig, {useFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true}),
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   // redux chrome dev tools must be commented out when being deployed!!!
 )
 
