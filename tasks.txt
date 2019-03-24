@@ -15,6 +15,13 @@ rpi program listening to firestore value and changes GPIO
 rpi sending lux values to firestore
   pwa listens for values and displays and uses logic to automate lights
 Had to fall back to real time database instead of firestore because too many read operation went through all the free data usage
+Automated motion light
+  get values from rtd and display
+  button to turn off led
+Install temp sensor libraries
+  use i2cdetect -y 1, to see addresses of i2c sensors
+  install adafruit libraries
+  get values from rtd and display
 
 hosting
   redux chrome dev tools must be commented out when being deployed!!!

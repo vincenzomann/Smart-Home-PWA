@@ -26,6 +26,9 @@ export const updateLight = (btnID) => {
     if(btnID === 'btnLed2Off'){
       rtdb.child('system1').update({led2: false})
     }
+    if(btnID === 'btnLed3Off'){
+      rtdb.child('system1').update({led3: false})
+    }
 
     // then( () => {
     //   dispatch({

@@ -5,8 +5,9 @@ const LightSummary = ({database}) => {
     return (
         <div className="summary">
             {/* <p>Status: {fSystem.dummyData}</p> */}
-            <p>Light 1: <b>{lightStatus(database.led1)}</b></p>
-            <p>Light 2: <b>{lightStatus(database.led2)}</b></p>
+            <span>Manual Light: <b>{lightStatus(database.led1)}</b></span>
+            <br/>
+            <span>Automated Light: <b>{lightStatus(database.led2)}</b></span>
         </div>
     )
 }

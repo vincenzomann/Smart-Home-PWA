@@ -13,8 +13,8 @@ const Navbar = (props) => {
 
     return (
         <div className="navbar">
+            <label htmlFor="toggle">  &#9776;  </label>
             <Link to='/' >Smart Home</Link>
-            <label htmlFor="toggle">  &#9776;</label>
             <input type="checkbox" id="toggle"/>
             <div className="nav-menu">
                 { links }

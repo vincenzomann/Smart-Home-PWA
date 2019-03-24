@@ -50,19 +50,19 @@ class HAS extends Component{
                     </div>
                     <div className="summary-link">
                         <Link to={'/' + sysDocID + '/temperature' }><h3>Temperature</h3></Link>
-                        <TemperatureSummary fSystem={fSystem} />
+                        <TemperatureSummary database={database} fSystem={fSystem} />
                     </div>
                     <div className="summary-link">
                         <Link to={'/' + sysDocID + '/pulse' }><h3>Heart Rate</h3></Link>
-                        <PulseSummary fSystem={fSystem} />
+                        <PulseSummary database={database} fSystem={fSystem} />
                     </div>
                     <div className="summary-link">
                         <Link to={'/' + sysDocID + '/door' }><h3>Door Sensor</h3></Link>
-                        <DoorSummary fSystem={fSystem} />
+                        <DoorSummary database={database} fSystem={fSystem} />
                     </div>
                     <div className="summary-link">
                         <Link to={'/' + sysDocID + '/motion' }><h3>Motion Sensor</h3></Link>
-                        <MotionSummary fSystem={fSystem} />
+                        <MotionSummary database={database} fSystem={fSystem} />
                     </div>
 
                 </div>

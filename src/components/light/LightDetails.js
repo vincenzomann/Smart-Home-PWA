@@ -8,6 +8,7 @@ import { fetchSystemData } from '../../store/actions/dataActions'
 
 class LightDetails extends Component {
 
+    // Fetch RTD data straight away otherwise values set as undefined on first render
     componentDidMount = () => {
         // get values from RTD and stored in redux state
         this.props.fetchSystemData();
@@ -43,7 +44,7 @@ class LightDetails extends Component {
                     <h3>Light</h3>
 
                     <div>
-                        <span>Light 1: <b>{this.lightStatus(database.led1)}</b></span>
+                        <span>Manual Light: <b>{this.lightStatus(database.led1)}</b></span>
                     </div>
 
                     <div>
@@ -56,20 +57,15 @@ class LightDetails extends Component {
                     <br/>
 
                     <div>
-                        <span>Light 2: <b>{this.lightStatus(database.led2)}</b></span>
-                    </div>
-
-                    <div>
-                        <button id="btnLed2On"
-                            onClick={this.handleLightSwitch}>Turn on</button>
-                        <button id="btnLed2Off"
-                            onClick={this.handleLightSwitch}>Turn off</button>
+                        <span>Automated Light: <b>{this.lightStatus(database.led2)}</b></span>
                     </div>
 
                     <br/>
 
                     <div>
                         <span>Lux value: <b>{database.lux}</b></span>
+                        <br/>
+                        <span>Lux threshold: <b>{database.luxThreshold}</b></span>
                     </div>
 
                     <br/>
@@ -163,8 +159,6 @@ const mapDispatchToProps = (dispatch) => {
         updateLight: (btnID) => dispatch(updateLight(btnID))
     }
 }
-
-
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
