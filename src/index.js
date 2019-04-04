@@ -18,7 +18,7 @@ const allStoreEnhancers = compose(
   reduxFirestore(fbConfig),
   reactReduxFirebase(fbConfig, {useFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true}),
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   // redux chrome dev tools must be commented out when being deployed!!!
 )
 

@@ -60,7 +60,7 @@ class MotionDetails extends Component {
                     <br/>
 
                     <div>
-                        <span>Motion Light: <b>{this.lightStatus(database.led3)}</b></span>
+                        <span>Security Light: <b>{this.lightStatus(database.led3)}</b></span>
                     </div>
 
                     <div>

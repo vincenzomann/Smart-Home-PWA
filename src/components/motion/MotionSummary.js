@@ -4,7 +4,7 @@ const MotionSummary = ({database}) => {
 
     return (
         <div className="summary">
-            <span>Motion Light: <b>{lightStatus(database.led3)}</b></span>
+            <span>Security Light: <b>{lightStatus(database.led3)}</b></span>
             <br/>
             <span>Motion Status: <b>{motionStatus(database.motion)}</b></span>
             <br/>
@@ -17,7 +17,7 @@ const MotionSummary = ({database}) => {
 const motionStatus = (motion) => {
     if (motion === true)
         return "Motion Detected"
-    // else if (light === false)
+    // else if (motion === false)
     //     return "-"
     else
         return "-"

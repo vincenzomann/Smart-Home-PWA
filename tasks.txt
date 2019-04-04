@@ -22,6 +22,8 @@ Install temp sensor libraries
   use i2cdetect -y 1, to see addresses of i2c sensors
   install adafruit libraries
   get values from rtd and display
+Get door sensor values using interrupt
+Get pulse sensor bpm
 
 hosting
   redux chrome dev tools must be commented out when being deployed!!!
